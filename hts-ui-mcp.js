@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================================
-   HTS UI MCP 2.0 · 零依赖组件库源码服务器
+   HTS UI MCP 2.5 · 零依赖组件库源码服务器
    Author: HTStudiocent · MIT · 展示: https://www.haotis.top/ui/
 
    用途：让任意 AI 编码客户端（Trae / Claude Desktop / Cursor 等）
@@ -8,8 +8,9 @@
    响应式断点（桌面/平板/手机）与动效规范。
 
    运行：node hts-ui-mcp.js（stdio 协议，无需任何依赖）
-   数据：data/hts-ui.json（由仓库根目录 build-data.js 生成，
-         与 dist 产物、官网展示页代码框同源一致）
+   数据：data/hts-ui.json（由仓库根目录 build-data.js 生成；
+         组件样例为仓库自带的 data/components/*.html，
+         与 dist 产物同源，不抓取任何网页）
    ============================================================ */
 'use strict';
 const fs = require('fs');
@@ -17,7 +18,7 @@ const path = require('path');
 
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/hts-ui.json'), 'utf8'));
 
-const SERVER_INFO = { name: 'hts-ui-mcp', version: '2.0.0' };
+const SERVER_INFO = { name: 'hts-ui-mcp', version: '2.5.0' };
 const PROTOCOL = '2024-11-05';
 
 /* ---------- 工具实现 ---------- */
@@ -73,6 +74,45 @@ const TOOLS = {
         run(a) {
             const c = findComponent(a.name);
             return c ? componentText(c) : '未找到组件「' + a.name + '」。可用：' + DATA.components.map(x => x.id).join(', ');
+        }
+    },
+    htsui_search_components: {
+        description: '按关键词搜索组件：匹配 id、中文名、说明、CSS 分组与源码内容，按相关度排序返回。参数 keyword 中英文均可，如 "标签" / "tab" / "弹窗" / "modal"。',
+        input: {
+            keyword: { type: 'string', description: '搜索关键词（中/英文均可）' },
+            limit: { type: 'number', description: '返回条数上限，默认 10' }
+        },
+        run(a) {
+            const raw = String(a.keyword || '').trim();
+            const q = raw.toLowerCase();
+            if (!q) return '请提供搜索关键词 keyword';
+            const limit = Math.max(1, Math.min(DATA.components.length, parseInt(a.limit, 10) || 10));
+            const hits = [];
+            for (const c of DATA.components) {
+                let score = 0;
+                const where = [];
+                const idL = c.id.toLowerCase();
+                const nameL = c.name.toLowerCase();
+                if (idL === q) { score += 100; where.push('id 精确'); }
+                else if (idL.indexOf(q) === 0) { score += 60; where.push('id 前缀'); }
+                else if (idL.includes(q)) { score += 40; where.push('id'); }
+                if (nameL === q) { score += 90; where.push('名称精确'); }
+                else if (nameL.includes(q)) { score += 50; where.push('名称'); }
+                if (c.desc && c.desc.toLowerCase().includes(q)) { score += 20; where.push('说明'); }
+                if (c.cssTitles.some(t => t.toLowerCase().includes(q))) { score += 15; where.push('CSS 分组'); }
+                if (c.boxes.some(b => b.code.toLowerCase().includes(q))) { score += 10; where.push('源码'); }
+                if (score > 0) hits.push({ c, score, where });
+            }
+            hits.sort((x, y) => y.score - x.score);
+            if (!hits.length) return '未找到与「' + raw + '」相关的组件。可用 id：' + DATA.components.map(x => x.id).join(', ');
+            const top = hits.slice(0, limit);
+            return [
+                '搜索「' + raw + '」命中 ' + hits.length + ' 个组件（前 ' + top.length + ' 个，按相关度排序）：',
+                '',
+                top.map(h => '- ' + h.c.id + ' | ' + h.c.name + ' | 相关度 ' + h.score + ' | 命中：' + h.where.join('、') + (h.c.desc ? '\n  ' + h.c.desc : '')).join('\n'),
+                '',
+                '用 htsui_get_component 按 id 取完整源码。'
+            ].join('\n');
         }
     },
     htsui_get_page_template: {
