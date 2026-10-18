@@ -1,8 +1,10 @@
 /* ============================================================
-   HTS UI MCP 2.0 · 数据构建脚本（零依赖）
+   HTS UI MCP 2.5 · 数据构建脚本（零依赖）
    在仓库根目录执行：node build-data.js
-   从 dist/hts-ui.css、dist/hts-ui.js、官网展示页 ui-content.js
-   提取全部组件的 HTML/CSS/JS 源码与响应式规则，生成 data/hts-ui.json
+   从 dist/hts-ui.css、dist/hts-ui.js 与仓库自带组件样例
+   data/components/*.html 提取全部组件的 HTML/CSS/JS 源码
+   与响应式规则，生成 data/hts-ui.json
+   （组件样例以 data/components/ 为准维护，不依赖任何网页）
    ============================================================ */
 'use strict';
 const fs = require('fs');
@@ -15,11 +17,14 @@ const OUT = path.join(__dirname, 'data');
 const cssText = fs.readFileSync(path.join(ROOT, 'dist/hts-ui.css'), 'utf8');
 const jsText = fs.readFileSync(path.join(ROOT, 'dist/hts-ui.js'), 'utf8');
 
-/* ---------- 2. 从展示页提取组件演示（HTML/JS 样例，与页面逐行一致） ---------- */
-let pageHtml = '';
-global.document = { body: { insertAdjacentHTML: function (pos, html) { pageHtml = html; } } };
-const uiContent = path.resolve(ROOT, '../官网/ui/ui-content.js');
-require(uiContent);
+/* ---------- 2. 从仓库自带样例提取组件演示（HTML/JS/CSS 代码框） ---------- */
+/* 组件展示顺序（基础 → 进阶），新增组件时同步维护并补充对应 .html 文件 */
+const ORDER = ['colors', 'typo', 'buttons', 'forms', 'cards', 'tags', 'table',
+    'overlay', 'motion', 'codebox', 'theme', 'topnav', 'sidenav',
+    'breadcrumb', 'pagination', 'tabs', 'accordion', 'steps', 'timeline',
+    'avatar', 'skeleton', 'alert', 'empty', 'spinner', 'tooltip',
+    'dropdown', 'segmented', 'listgroup'];
+const COMPONENTS_DIR = path.join(OUT, 'components');
 
 function decodeEntities(s) {
     return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
@@ -27,11 +32,11 @@ function decodeEntities(s) {
 }
 
 const components = [];
-const secRe = /<section id="([^"]+)" class="ui-block">[\s\S]*?<h2>([^<]+)<\/h2>[\s\S]*?(?=<section |<\/main>|$)/g;
-let m;
-while ((m = secRe.exec(pageHtml)) !== null) {
-    const id = m[1], name = m[2];
-    const seg = m[0];
+for (const id of ORDER) {
+    const file = path.join(COMPONENTS_DIR, id + '.html');
+    if (!fs.existsSync(file)) { console.error('缺少组件样例文件：' + file); process.exit(1); }
+    const seg = fs.readFileSync(file, 'utf8');
+    const nameM = seg.match(/<h2>([^<]+)<\/h2>/);
     const descM = seg.match(/<p class="ui-desc">([\s\S]*?)<\/p>/);
     const desc = descM ? descM[1].replace(/<[^>]+>/g, '').trim() : '';
     const boxes = [];
@@ -40,8 +45,7 @@ while ((m = secRe.exec(pageHtml)) !== null) {
     while ((b = boxRe.exec(seg)) !== null) {
         boxes.push({ lang: b[1], code: decodeEntities(b[2]).replace(/\r\n/g, '\n').trim() });
     }
-    // 演示标记：section 内 code-box 之外的第一块 ui-demo 即活体示例 HTML
-    components.push({ id, name, desc, boxes });
+    components.push({ id, name: nameM ? nameM[1] : id, desc, boxes });
 }
 
 /* ---------- 3. CSS 按注释分组（大段 / 小节 / @media / @keyframes） ---------- */
@@ -113,7 +117,7 @@ const a11y = css.filter(g => g.css.includes('prefers-reduced-motion') || g.title
 
 const data = {
     name: 'HTS UI',
-    version: '2.0.0',
+    version: '2.5.0',
     tagline: '零依赖 · 黑白灰 · 简约扁平 · 浅色/深色/跟随系统 · 桌面/平板/手机响应式',
     author: 'HTStudiocent · MIT License · 展示: https://www.haotis.top/ui/',
     stats: {
