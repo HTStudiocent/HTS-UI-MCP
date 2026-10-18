@@ -1,0 +1,81 @@
+<section id="tabs" class="ui-block">
+                <h2>标签页</h2>
+                <p class="ui-desc">tabs-nav 里的按钮与 tabs-panel 按出现顺序一一对应，点击切换面板。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="tabs">
+                        <div class="tabs-nav">
+                            <button class="active">简介</button>
+                            <button>安装</button>
+                            <button>许可</button>
+                        </div>
+                        <div class="tabs-panel active">HTS UI：零依赖的黑白灰扁平组件库。</div>
+                        <div class="tabs-panel">复制 dist/hts-ui.css 与 dist/hts-ui.js 到项目即可使用。</div>
+                        <div class="tabs-panel">MIT License，可自由商用。</div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="tabs"&gt;
+    &lt;div class="tabs-nav"&gt;
+        &lt;button class="active"&gt;简介&lt;/button&gt;
+        &lt;button&gt;安装&lt;/button&gt;
+        &lt;button&gt;许可&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="tabs-panel active"&gt;面板一&lt;/div&gt;
+    &lt;div class="tabs-panel"&gt;面板二&lt;/div&gt;
+    &lt;div class="tabs-panel"&gt;面板三&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.tabs {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.tabs-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--block);
+}
+
+.tabs-nav button {
+    padding: 10px 18px;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tabs-nav button:hover {
+    color: var(--text);
+}
+
+.tabs-nav button.active {
+    color: var(--primary);
+    font-weight: bold;
+    background: var(--surface);
+    border-bottom-color: var(--primary);
+}
+
+.tabs-panel {
+    display: none;
+    padding: 18px 20px;
+    font-size: 14px;
+    color: var(--text-soft);
+}
+
+.tabs-panel.active {
+    display: block;
+}</code></pre>
+                </div>
+<div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 引入 hts-ui.js 后调用 HTSUI.init()（或直接加载脚本）即自动绑定，无需编写 JS</code></pre>
+                </div>
+            </section>
+            <!-- 折叠面板 -->

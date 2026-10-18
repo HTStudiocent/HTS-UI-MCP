@@ -1,0 +1,193 @@
+<section id="codebox" class="ui-block">
+                <h2>代码框</h2>
+                <p class="ui-desc">用于展示代码片段，带语言标签、行号与复制按钮；默认收起，点击标题栏展开；超长内容在框内滚动（最大高度由 --code-max-height 控制）。</p>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="code-box"&gt;
+    &lt;div class="code-box-head"&gt;
+        &lt;span class="code-box-lang"&gt;HTML&lt;/span&gt;
+        &lt;button class="code-copy"&gt;复制&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;pre&gt;&lt;code&gt;// 你的代码&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.code-box {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 16px;
+    background-color: var(--code-bg);
+}
+
+.code-box-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 40px 8px 14px;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.code-box-head:hover {
+    background-color: var(--block);
+}
+
+/* 展开箭头 */
+.code-box-head::after {
+    content: "▶";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: var(--text-faint);
+    transition: transform 0.25s ease;
+}
+
+.code-box.expanded .code-box-head::after {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.code-box-lang {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: "Consolas", "Monaco", monospace;
+    letter-spacing: 0.5px;
+}
+
+.code-copy {
+    padding: 4px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--text-soft);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.code-copy:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* 展开后才显示复制按钮 */
+.code-box.expanded .code-copy {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.code-box pre {
+    margin: 0;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+}
+
+.code-box.expanded pre {
+    max-height: var(--code-max-height); /* 超长时框内竖向滚动，不撑长页面 */
+    padding: 16px 18px;
+    opacity: 1;
+    overflow: auto;
+}
+
+.code-box code {
+    display: block;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--code-text);
+    white-space: pre;
+    counter-reset: line;
+}
+
+/* 代码行（行号由 CSS 计数器生成，横向滚动时固定在左侧） */
+.code-line {
+    display: block;
+    counter-increment: line;
+}
+
+.code-line::before {
+    content: counter(line);
+    position: sticky;
+    left: 0;
+    display: inline-block;
+    width: 2.2em;
+    padding-right: 12px;
+    margin-right: 12px;
+    text-align: right;
+    color: var(--text-faint);
+    background-color: var(--code-bg);
+    border-right: 1px solid var(--border);
+    user-select: none;
+}</code></pre>
+                </div>
+                <p class="ui-desc" style="margin-top:12px">复制按钮交互（读取相邻 code 文本）：</p>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 按行包裹（配合 CSS 计数器显示行号）
+document.querySelectorAll('.code-box pre &gt; code').forEach(function (code) {
+    var lines = code.textContent.split('\n');
+    code.textContent = '';
+    lines.forEach(function (line) {
+        var s = document.createElement('span');
+        s.className = 'code-line';
+        s.appendChild(document.createTextNode(line));
+        code.appendChild(s);
+    });
+});
+
+// 代码框展开/收起
+document.querySelectorAll('.code-box').forEach(function (box) {
+    var head = box.querySelector('.code-box-head');
+    if (!head) return;
+    head.addEventListener('click', function (e) {
+        // 点击复制按钮不触发展开/收起
+        if (e.target.classList.contains('code-copy')) return;
+        box.classList.toggle('expanded');
+    });
+});
+
+// 复制按钮（逐行取值拼回纯代码，不含行号；成功后短暂显示"已复制"）
+document.querySelectorAll('.code-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        var rows = btn.closest('.code-box').querySelectorAll('.code-line');
+        var code = Array.prototype.map.call(rows, function (l) {
+            return l.textContent;
+        }).join('\n');
+        function done() {
+            var old = btn.textContent;
+            btn.textContent = '已复制';
+            setTimeout(function () { btn.textContent = old; }, 1200);
+        }
+        function fallback() {
+            var t = document.createElement('textarea');
+            t.value = code;
+            document.body.appendChild(t);
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+            done();
+        }
+        if (navigator.clipboard &amp;&amp; navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(done, fallback);
+        } else {
+            fallback();
+        }
+    });
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 主题切换 -->

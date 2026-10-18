@@ -1,0 +1,143 @@
+<section id="motion" class="ui-block">
+                <h2>进度与动效</h2>
+                <p class="ui-desc">三种用法：按钮随机推进、按住拖动实时改变（拖动时小球跟随显示位置）、输入百分比定位。动效参考：悬停 0.25s · 按压 0.15s · 渐显 0.6s。</p>
+                <div class="ui-demo ui-demo-col">
+                    <p class="ui-label">随机推进（0.6s 平滑过渡）</p>
+                    <div class="progress ui-demo-full"><div class="progress-bar" id="uiProgressBar" style="width:0%"></div></div>
+                    <div><button class="btn btn-plain btn-sm" id="uiProgressBtn" style="margin-top:0">随机进度</button></div>
+                    <p class="ui-label" style="margin-top:12px">拖动进度条 · 按住左右拖动实时改变（支持触屏），悬停/拖动时显示小球手柄</p>
+                    <div class="progress progress-drag ui-demo-full" id="uiDragBar"><div class="progress-bar" style="width:40%"><div class="progress-thumb"></div></div></div>
+                    <p class="ui-label" style="margin-top:12px">自定义进度 · 输入 0~100 的数字，进度条即时移动到对应位置，超出范围自动取 0 或 100</p>
+                    <div style="display:flex;gap:12px;align-items:center;width:100%">
+                        <input class="input" id="uiPctInput" placeholder="输入百分比，如 60" inputmode="numeric" style="max-width:180px;width:180px">
+                        <div class="progress" style="flex:1"><div class="progress-bar" id="uiPctFill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="progress"&gt;
+    &lt;div class="progress-bar" style="width:60%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 可拖动 --&gt;
+&lt;div class="progress progress-drag" id="dragBar"&gt;
+    &lt;div class="progress-bar" style="width:40%"&gt;
+        &lt;div class="progress-thumb"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 输入百分比 --&gt;
+&lt;input class="input" id="pctInput" placeholder="输入百分比，如 60" inputmode="numeric"&gt;
+&lt;div class="progress"&gt;
+    &lt;div class="progress-bar" id="pctFill" style="width:0%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr class="divider"&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.progress {
+    height: 6px;
+    background-color: var(--block);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: var(--primary);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+/* 可拖动进度条：拖动时实时跟随，取消过渡避免迟滞 */
+.progress-drag {
+    cursor: pointer;
+    touch-action: none;
+    overflow: visible; /* 让小球能超出 6px 轨道显示 */
+}
+
+.progress-drag .progress-bar {
+    transition: none;
+    position: relative;
+}
+
+/* 拖动手柄小球：跟随填充末端，悬停/拖动时显示 */
+.progress-thumb {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    border: 2px solid var(--bg);
+    box-sizing: border-box;
+    transform: translateY(-50%) scale(0.4);
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.progress-drag:hover .progress-thumb,
+.progress-drag.dragging .progress-thumb {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+}
+
+.progress-drag.dragging .progress-thumb {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.divider {
+    height: 1px;
+    border: none;
+    background-color: var(--border);
+}</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 1. 随机推进（宽度变化由 CSS transition 0.6s 平滑过渡）
+var bar = document.querySelector('#randomBar .progress-bar');
+document.getElementById('runBtn').addEventListener('click', function () {
+    bar.style.width = (20 + Math.floor(Math.random() * 80)) + '%';
+});
+
+// 2. 按住拖动实时改变（Pointer Events 兼容鼠标/触屏，拖动时小球放大）
+var wrap = document.getElementById('dragBar');
+var fill = wrap.querySelector('.progress-bar');
+var dragging = false;
+function setFromX(clientX) {
+    var rect = wrap.getBoundingClientRect();
+    var pct = Math.round((clientX - rect.left) / rect.width * 100);
+    pct = Math.max(0, Math.min(100, pct));
+    fill.style.width = pct + '%';
+}
+wrap.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    wrap.classList.add('dragging'); // 显示并放大小球
+    wrap.setPointerCapture(e.pointerId);
+    setFromX(e.clientX);
+});
+wrap.addEventListener('pointermove', function (e) {
+    if (dragging) setFromX(e.clientX);
+});
+wrap.addEventListener('pointerup', function () {
+    dragging = false;
+    wrap.classList.remove('dragging');
+});
+
+// 3. 输入百分比即时定位
+var input = document.getElementById('pctInput');
+var target = document.getElementById('pctFill');
+input.addEventListener('input', function () {
+    var v = parseInt(input.value, 10);
+    if (isNaN(v)) return;
+    v = Math.max(0, Math.min(100, v));
+    target.style.width = v + '%';
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 代码框 -->

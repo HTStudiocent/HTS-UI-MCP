@@ -1,0 +1,142 @@
+<section id="overlay" class="ui-block">
+                <h2>弹窗与提示</h2>
+                <p class="ui-desc">遮罩淡入，卡片轻微放大；提示从底部浮现。</p>
+                <div class="ui-demo">
+                    <button class="btn" id="uiModalBtn" data-hts-modal="uiModal" style="margin-top:0">打开弹窗</button>
+                    <button class="btn btn-plain" id="uiToastBtn" style="margin-top:0">显示提示</button>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;button class="btn" id="openBtn"&gt;打开弹窗&lt;/button&gt;
+
+&lt;!-- 弹窗 --&gt;
+&lt;div class="modal-mask" id="myModal"&gt;
+    &lt;div class="modal-box"&gt;
+        &lt;button class="modal-close" id="closeBtn"&gt;×&lt;/button&gt;
+        &lt;p class="modal-title"&gt;标题&lt;/p&gt;
+        &lt;p&gt;内容&lt;/p&gt;
+        &lt;div style="margin-top:20px"&gt;
+            &lt;button class="btn" id="okBtn"&gt;确 定&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 提示 --&gt;
+&lt;div class="toast" id="myToast"&gt;提示内容&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.modal-mask {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--modal-overlay);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal-mask.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-box {
+    position: relative;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 36px 40px 30px;
+    text-align: center;
+    width: 300px;
+    transform: scale(0.94);
+    transition: transform 0.25s ease, background-color 0.3s ease,
+                border-color 0.3s ease;
+}
+
+.modal-mask.show .modal-box { transform: scale(1); }
+
+.modal-close {
+    position: absolute;
+    top: 10px; right: 14px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--text-faint);
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.modal-close:hover {
+    color: var(--primary);
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+    transform: translate(-50%, 16px);
+    background-color: var(--primary);
+    color: var(--on-primary);
+    padding: 10px 26px;
+    border-radius: 15px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 200;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 弹窗
+var modal = document.getElementById('myModal');
+function closeModal() { modal.classList.remove('show'); }
+
+document.getElementById('openBtn').addEventListener('click', function () {
+    modal.classList.add('show');          // 打开
+});
+document.getElementById('okBtn').addEventListener('click', closeModal);
+document.getElementById('closeBtn').addEventListener('click', closeModal);
+
+modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal(); // 点击遮罩关闭
+});
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal(); // ESC 关闭
+});
+
+// 提示（1.8 秒自动消失）
+var toastEl = document.getElementById('myToast');
+var toastTimer = null;
+function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+        toastEl.classList.remove('show');
+    }, 1800);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 进度与动效 -->

@@ -1,0 +1,94 @@
+<section id="steps" class="ui-block">
+                <h2>步骤条</h2>
+                <p class="ui-desc">done 已完成（实心黑点）、active 进行中（描边加粗）、默认未开始；连接线自动染色。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="steps">
+                        <div class="step done"><div class="step-dot">✓</div>提交</div>
+                        <div class="step active"><div class="step-dot">2</div>审核</div>
+                        <div class="step"><div class="step-dot">3</div>发布</div>
+                    </div>
+                    <div style="display:flex;gap:12px">
+                        <button class="btn btn-plain btn-sm" id="uiStepPrev" style="margin-top:0">上一步</button>
+                        <button class="btn btn-sm" id="uiStepNext" style="margin-top:0">下一步</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="steps"&gt;
+    &lt;div class="step done"&gt;&lt;div class="step-dot"&gt;✓&lt;/div&gt;提交&lt;/div&gt;
+    &lt;div class="step active"&gt;&lt;div class="step-dot"&gt;2&lt;/div&gt;审核&lt;/div&gt;
+    &lt;div class="step"&gt;&lt;div class="step-dot"&gt;3&lt;/div&gt;发布&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- done 已完成 · active 进行中 · 不加类为未开始 --&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.steps {
+    display: flex;
+}
+
+.step {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.step .step-dot {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: -50%;
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+}
+
+.step:first-child::before {
+    display: none;
+}
+
+.step.done {
+    color: var(--text-soft);
+}
+
+.step.done .step-dot {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.step.done::before,
+.step.active::before {
+    background: var(--primary);
+}
+
+.step.active {
+    color: var(--text);
+    font-weight: bold;
+}
+
+.step.active .step-dot {
+    border-color: var(--primary);
+    color: var(--primary);
+}</code></pre>
+                </div>
+            </section>
+            <!-- 时间线 -->

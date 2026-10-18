@@ -1,0 +1,82 @@
+<section id="pagination" class="ui-block">
+                <h2>分页</h2>
+                <p class="ui-desc">当前页黑底高亮；按钮带 data-page 即可由组件库自动切换高亮，disabled 为禁用态。</p>
+                <div class="ui-demo">
+                    <div class="pagination">
+                        <button disabled>«</button>
+                        <button data-page="1">1</button>
+                        <button data-page="2" class="active">2</button>
+                        <button data-page="3">3</button>
+                        <span class="page-dots">…</span>
+                        <button data-page="8">8</button>
+                        <button>»</button>
+                    </div>
+                    <p class="ui-label" id="uiPageNow" style="margin-top:12px">当前第 2 页 · 点击页码切换</p>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="pagination"&gt;
+    &lt;button disabled&gt;«&lt;/button&gt;
+    &lt;button data-page="1"&gt;1&lt;/button&gt;
+    &lt;button data-page="2" class="active"&gt;2&lt;/button&gt;
+    &lt;button data-page="3"&gt;3&lt;/button&gt;
+    &lt;span class="page-dots"&gt;…&lt;/span&gt;
+    &lt;button data-page="8"&gt;8&lt;/button&gt;
+    &lt;button&gt;»&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.pagination {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pagination button,
+.pagination .page-dots {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-soft);
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.pagination button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination .page-dots {
+    border: none;
+    background: none;
+    color: var(--text-faint);
+    cursor: default;
+}</code></pre>
+                </div>
+<div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 引入 hts-ui.js 后调用 HTSUI.init()（或直接加载脚本）即自动绑定，无需编写 JS
+// 省略号等非页码按钮不带 data-page，即不参与切换</code></pre>
+                </div>
+            </section>
+            <!-- 标签页 -->

@@ -1,0 +1,51 @@
+<section id="alert" class="ui-block">
+                <h2>提示条</h2>
+                <p class="ui-desc">三种强度：默认灰底、strong 左侧黑条、dark 黑底白字；.alert-title 起头加粗。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="alert">常规提示条：用于弱提醒。<button class="alert-close" aria-label="关闭">×</button></div>
+                    <div class="alert strong"><span><span class="alert-title">重要提醒</span> 左侧黑条强调，用于需要关注的说明。</span><button class="alert-close" aria-label="关闭">×</button></div>
+                    <div class="alert dark"><span><span class="alert-title">强提示</span> 黑底白字，用于最高优先级信息。</span><button class="alert-close" aria-label="关闭">×</button></div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="alert"&gt;常规提示&lt;/div&gt;
+&lt;div class="alert strong"&gt;&lt;span&gt;&lt;span class="alert-title"&gt;重要&lt;/span&gt; 说明文字&lt;/span&gt;&lt;/div&gt;
+&lt;div class="alert dark"&gt;&lt;span&gt;&lt;span class="alert-title"&gt;强提示&lt;/span&gt; 说明文字&lt;/span&gt;&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.alert {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-soft);
+    background: var(--block);
+}
+
+.alert .alert-title {
+    font-weight: bold;
+    color: var(--text);
+}
+
+.alert.strong {
+    background: var(--surface);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+}
+
+.alert.dark {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.alert.dark .alert-title {
+    color: var(--on-primary);
+}</code></pre>
+                </div>
+            </section>
+            <!-- 空状态 -->

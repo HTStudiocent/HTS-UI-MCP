@@ -1,0 +1,113 @@
+<section id="colors" class="ui-block">
+                <h2>色彩</h2>
+                <p class="ui-desc">只用黑白灰，禁止渐变与彩色。所有颜色通过 CSS 变量定义，切换主题自动适配：色块颜色、显示的色值、复制的值都随当前主题变化。点击色块复制。</p>
+                <div class="ui-demo">
+                    <div class="ui-swatch-grid">
+                        <button class="ui-swatch" data-hex="#1a1a1a" data-hex-light="#1a1a1a" data-hex-dark="#e8e8e8"><div class="chip" style="background:var(--primary)"></div><p class="hex">#1A1A1A</p><p class="name">主色</p></button>
+                        <button class="ui-swatch" data-hex="#555555" data-hex-light="#555555" data-hex-dark="#b0b0b0"><div class="chip" style="background:var(--text-soft)"></div><p class="hex">#555555</p><p class="name">正文</p></button>
+                        <button class="ui-swatch" data-hex="#888888" data-hex-light="#888888" data-hex-dark="#9a9a9a"><div class="chip" style="background:var(--text-muted)"></div><p class="hex">#888888</p><p class="name">次要文字</p></button>
+                        <button class="ui-swatch" data-hex="#999999" data-hex-light="#999999" data-hex-dark="#777777"><div class="chip" style="background:var(--text-faint)"></div><p class="hex">#999999</p><p class="name">辅助文字</p></button>
+                        <button class="ui-swatch" data-hex="#e5e5e5" data-hex-light="#e5e5e5" data-hex-dark="#2e2e2e"><div class="chip" style="background:var(--border)"></div><p class="hex">#E5E5E5</p><p class="name">边框</p></button>
+                        <button class="ui-swatch" data-hex="#f5f5f5" data-hex-light="#f5f5f5" data-hex-dark="#1e1e1e"><div class="chip" style="background:var(--block)"></div><p class="hex">#F5F5F5</p><p class="name">区块背景</p></button>
+                        <button class="ui-swatch" data-hex="#ffffff" data-hex-light="#ffffff" data-hex-dark="#141414"><div class="chip" style="background:var(--bg)"></div><p class="hex">#FFFFFF</p><p class="name">页面背景</p></button>
+                    </div>
+                </div>
+                <div class="code-box only-light">
+                    <div class="code-box-head"><span class="code-box-lang">CSS · 浅色</span><button class="code-copy">复制</button></div>
+                    <pre><code>:root {
+    --bg: #ffffff;          /* 页面背景 */
+    --surface: #ffffff;     /* 卡片/输入框背景 */
+    --block: #f5f5f5;       /* 区块背景 */
+    --border: #e5e5e5;      /* 边框 */
+    --text: #1a1a1a;        /* 主文字 */
+    --text-soft: #555555;   /* 次要文字 */
+    --text-muted: #888888;  /* 辅助文字 */
+    --text-faint: #999999;  /* 最浅文字 */
+    --primary: #1a1a1a;     /* 主色 */
+    --on-primary: #ffffff;  /* 主色上的文字 */
+    --footer-bg: #1a1a1a;
+    --footer-text: #ffffff;
+    --footer-muted: #999999;
+    --shadow: rgba(0,0,0,0.06);
+    --modal-overlay: rgba(0,0,0,0.5);
+    --switch-knob: #ffffff;
+    --code-bg: #f5f5f5;
+    --code-text: #555555;
+    --code-max-height: 320px; /* 代码框展开后最大高度，超出内部滚动，可自行调整 */
+}</code></pre>
+                </div>
+                <div class="code-box only-dark">
+                    <div class="code-box-head"><span class="code-box-lang">CSS · 深色</span><button class="code-copy">复制</button></div>
+                    <pre><code>/* 深色模式：同名变量整体覆盖，组件无需改动 */
+html[data-theme="dark"] {
+    --bg: #141414;          /* 页面背景 */
+    --surface: #1c1c1c;     /* 卡片/输入框背景 */
+    --block: #1e1e1e;       /* 区块背景 */
+    --border: #2e2e2e;      /* 边框 */
+    --text: #e8e8e8;        /* 主文字 */
+    --text-soft: #b0b0b0;   /* 次要文字 */
+    --text-muted: #9a9a9a;  /* 辅助文字 */
+    --text-faint: #777777;  /* 最浅文字 */
+    --primary: #e8e8e8;     /* 主色反转 */
+    --on-primary: #141414;  /* 主色上的文字反转 */
+    --footer-bg: #0d0d0d;
+    --footer-text: #e8e8e8;
+    --footer-muted: #888888;
+    --shadow: rgba(0,0,0,0.35);
+    --modal-overlay: rgba(0,0,0,0.7);
+    --switch-knob: #f0f0f0;
+    --code-bg: #1e1e1e;
+    --code-text: #b0b0b0;
+    --code-max-height: 320px;
+}</code></pre>
+                </div>
+                                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>:root {
+    --primary: #1a1a1a;    /* 主色（按钮/强调） */
+    --text-soft: #555555;  /* 正文 */
+    --text-muted: #888888; /* 次要文字 */
+    --text-faint: #999999; /* 辅助文字 */
+    --border: #e5e5e5;     /* 边框 */
+    --block: #f5f5f5;      /* 浅灰块背景 */
+}
+
+html[data-theme=&quot;dark&quot;] {
+    --primary: #e8e8e8;
+    --text-soft: #b0b0b0;
+    --text-muted: #9a9a9a;
+    --text-faint: #777777;
+    --border: #2e2e2e;
+    --block: #1e1e1e;
+}</code></pre>
+                </div>
+<div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 点击色块复制色值并弹出提示
+document.querySelectorAll('.ui-swatch').forEach(function (sw) {
+    sw.addEventListener('click', function () {
+        var hex = sw.getAttribute('data-hex');
+        navigator.clipboard.writeText(hex).then(function () {
+            showToast('已复制 ' + hex);
+        });
+    });
+});
+
+// 主题切换时刷新色块：data-hex-light / data-hex-dark
+function refreshSwatches() {
+    var t = document.documentElement.getAttribute('data-theme');
+    var dark = t ? t === 'dark'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.querySelectorAll('.ui-swatch').forEach(function (sw) {
+        var hex = sw.getAttribute(dark ? 'data-hex-dark' : 'data-hex-light');
+        sw.setAttribute('data-hex', hex);
+        var p = sw.querySelector('.hex');
+        if (p) p.textContent = hex.toUpperCase();
+    });
+}
+refreshSwatches();
+document.addEventListener('hts-theme-change', refreshSwatches);</code></pre>
+                </div>
+            </section>
+
+            <!-- 字体 -->

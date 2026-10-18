@@ -1,0 +1,209 @@
+<section id="sidenav" class="ui-block">
+                <h2>侧边导航栏</h2>
+                <p class="ui-desc">桌面端 sticky 定位、可点击缩回；窄屏（≤800px）自动变为隐藏式抽屉：左下 ☰ 悬浮按钮唤出，点遮罩 / 点导航项 / 点 ✕ 收起，滚动时自动高亮当前区块。</p>
+                <div class="ui-demo" style="align-items:stretch">
+                    <div class="ui-side" id="uiSideDemo" style="position:static;width:160px;padding:0 8px;border-right:1px solid var(--border)">
+                        <a href="javascript:void(0)" class="active">色彩</a>
+                        <a href="javascript:void(0)">字体</a>
+                        <a href="javascript:void(0)">按钮</a>
+                        <a href="javascript:void(0)">卡片</a>
+                    </div>
+                    <div style="flex:1;min-width:0;font-size:14px;color:var(--text-muted)">
+                        内容区 · 点击上方 ◀ 按钮可收起左侧导航
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="ui-side-mask" id="uiSideMask"&gt;&lt;/div&gt;
+
+&lt;aside class="ui-side-wrap"&gt;
+    &lt;button class="ui-side-toggle" id="uiSideToggle"
+            aria-label="收起侧边栏"&gt;◀&lt;/button&gt;
+    &lt;div class="ui-side" id="uiSide"&gt;
+        &lt;a href="#colors"&gt;色彩&lt;/a&gt;
+        &lt;a href="#typo"&gt;字体&lt;/a&gt;
+        &lt;a href="#buttons"&gt;按钮&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.ui-side-wrap {
+    position: sticky;
+    top: 88px;
+    flex: none;
+}
+
+.ui-side-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-soft);
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.ui-side-toggle:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.ui-side {
+    width: 180px;
+    padding: 12px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.ui-side.collapsed { width: 0; opacity: 0; }
+
+.ui-side a {
+    padding: 8px 14px;
+    font-size: 14px;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-radius: 10px;
+    white-space: nowrap;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.ui-side a:hover {
+    color: var(--primary);
+    background-color: var(--block);
+}
+
+.ui-side a.active {
+    color: var(--on-primary);
+    background-color: var(--primary);
+}
+
+/* 侧边导航遮罩：桌面端不存在 */
+.ui-side-mask { display: none; }
+
+/* 窄屏：隐藏式抽屉侧边导航 */
+@media (max-width: 800px) {
+    .ui-side-mask {
+        display: block;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: var(--modal-overlay);
+        z-index: 54;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .ui-side-mask.show { opacity: 1; visibility: visible; }
+
+    .ui-side-wrap {
+        position: fixed;
+        left: -230px; /* 用 left 做滑入，transform 会带跑内部 fixed 按钮 */
+        top: 0;
+        height: 100%;
+        width: 230px;
+        max-width: 80vw;
+        padding: 20px 12px;
+        background-color: var(--surface);
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        z-index: 55;
+    }
+
+    .ui-side-wrap.open { left: 0; }
+
+    .ui-side {
+        width: 100%;
+        flex-direction: column;
+        transition: none;
+    }
+
+    .ui-side-toggle {
+        position: fixed;
+        left: 14px; bottom: 20px;
+        width: 44px; height: 44px;
+        margin: 0;
+        border-radius: 50%;
+        border: none;
+        background-color: var(--primary);
+        color: var(--on-primary);
+        font-size: 16px;
+        z-index: 60;
+        box-shadow: 0 4px 14px var(--shadow);
+    }
+
+    body.drawer-open { overflow: hidden; }
+}</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 侧边导航：桌面端缩回，窄屏抽屉式展开
+var side = document.getElementById('uiSide');
+var sideWrap = document.querySelector('.ui-side-wrap');
+var sideToggle = document.getElementById('uiSideToggle');
+var sideMask = document.getElementById('uiSideMask');
+
+function isNarrow() { return window.innerWidth &lt;= 800; }
+
+function syncToggleIcon() {
+    sideToggle.textContent = isNarrow()
+        ? (sideWrap.classList.contains('open') ? '✕' : '☰')
+        : (side.classList.contains('collapsed') ? '▶' : '◀');
+}
+
+function setDrawer(open) {
+    sideWrap.classList.toggle('open', open);
+    sideMask.classList.toggle('show', open);
+    document.body.classList.toggle('drawer-open', open);
+    syncToggleIcon();
+}
+
+sideToggle.addEventListener('click', function () {
+    if (isNarrow()) {
+        setDrawer(!sideWrap.classList.contains('open'));
+    } else {
+        side.classList.toggle('collapsed');
+        syncToggleIcon();
+    }
+});
+sideMask.addEventListener('click', function () { setDrawer(false); });
+window.addEventListener('resize', syncToggleIcon);
+syncToggleIcon();
+
+// 滚动自动高亮（IntersectionObserver）
+var links = document.querySelectorAll('.ui-side a');
+var blocks = document.querySelectorAll('.ui-block');
+
+// 窄屏点击导航项后收起抽屉
+links.forEach(function (l) {
+    l.addEventListener('click', function () {
+        if (isNarrow()) setDrawer(false);
+    });
+});
+
+if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (en.isIntersecting) {
+                links.forEach(function (l) {
+                    l.classList.toggle('active',
+                        l.getAttribute('href') === '#' + en.target.id);
+                });
+            }
+        });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    blocks.forEach(function (b) { io.observe(b); });
+}</code></pre>
+                </div>
+            </section>
+            <!-- 面包屑 -->

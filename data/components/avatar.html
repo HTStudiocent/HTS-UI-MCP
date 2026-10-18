@@ -1,0 +1,86 @@
+<section id="avatar" class="ui-block">
+                <h2>头像</h2>
+                <p class="ui-desc">首字母、图片两种内容；sm/lg 尺寸、square 方角，avatar-group 自动叠放。</p>
+                <div class="ui-demo">
+                    <div class="avatar-row">
+                        <span class="avatar sm">H</span>
+                        <span class="avatar">H</span>
+                        <span class="avatar lg">H</span>
+                        <span class="avatar square">T</span>
+                        <span class="avatar"><img src="https://www.haotis.top/htsicon.ico" alt=""></span>
+                        <span class="avatar-group"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></span>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;!-- 文字头像 / 图片头像 / 尺寸与方角 / 叠放组 --&gt;
+&lt;span class="avatar"&gt;H&lt;/span&gt;
+&lt;span class="avatar sm"&gt;H&lt;/span&gt;
+&lt;span class="avatar lg"&gt;H&lt;/span&gt;
+&lt;span class="avatar square"&gt;T&lt;/span&gt;
+&lt;span class="avatar"&gt;&lt;img src="图片地址" alt=""&gt;&lt;/span&gt;
+&lt;span class="avatar-group"&gt;
+    &lt;span class="avatar"&gt;A&lt;/span&gt;
+    &lt;span class="avatar"&gt;B&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--on-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar.sm {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+}
+
+.avatar.lg {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+}
+
+.avatar.square {
+    border-radius: 10px;
+}
+
+.avatar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.avatar-group {
+    display: flex;
+}
+
+.avatar-group .avatar {
+    margin-left: -10px;
+    border: 2px solid var(--bg);
+}
+
+.avatar-group .avatar:first-child {
+    margin-left: 0;
+}</code></pre>
+                </div>
+            </section>
+            <!-- 骨架屏 -->

@@ -1,0 +1,94 @@
+<section id="theme" class="ui-block">
+                <h2>主题切换</h2>
+                <p class="ui-desc">支持系统默认 / 浅色模式 / 深色模式，选择自动保存到浏览器。右上角下拉框可即时切换查看效果。组件样式只写一次并全部使用 var() 变量，深色模式只需覆盖下列变量，无需为组件写第二套样式。</p>
+                <div class="ui-demo">
+                    <select class="select theme-select" id="themeSelect2" style="max-width:200px">
+                        <option value="system">系统默认</option>
+                        <option value="light">浅色模式</option>
+                        <option value="dark">深色模式</option>
+                    </select>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;select class="theme-select" id="themeSelect"&gt;
+    &lt;option value="system"&gt;系统默认&lt;/option&gt;
+    &lt;option value="light"&gt;浅色模式&lt;/option&gt;
+    &lt;option value="dark"&gt;深色模式&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.theme-select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 6px 28px 6px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.theme-select:hover {
+    border-color: var(--primary);
+}
+
+.theme-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>/* 深色主题：仅覆盖变量（与"色彩"区块 :root 浅色变量一一对应） */
+html[data-theme="dark"] {
+    --bg: #141414;
+    --surface: #1c1c1c;
+    --block: #1e1e1e;
+    --border: #2e2e2e;
+    --text: #e8e8e8;
+    --text-soft: #b0b0b0;
+    --text-muted: #9a9a9a;
+    --text-faint: #777777;
+    --primary: #e8e8e8;        /* 主色反转：按钮变浅底深字 */
+    --on-primary: #141414;
+    --footer-bg: #0d0d0d;
+    --footer-text: #e8e8e8;
+    --footer-muted: #888888;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --modal-overlay: rgba(0, 0, 0, 0.7);
+    --switch-knob: #f0f0f0;
+    --code-bg: #1e1e1e;
+    --code-text: #b0b0b0;
+}
+
+/* 跟随系统：用户未手动选择主题时，系统深色同样生效 */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) {
+        --bg: #141414;
+        /* ……其余变量与上方深色块一致…… */
+    }
+}
+
+/* 主题切换由 html[data-theme] 属性驱动：
+   "light" / "dark" 为手动选择，属性不存在 = 跟随系统 */</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 引入 hts-ui.js 后：.theme-select 下拉框会被自动绑定（HTSUI.init），
+// 也可通过 HTSTheme 手动控制：
+var sel = document.getElementById('themeSelect');
+sel.value = HTSTheme.getMode();
+sel.addEventListener('change', function () {
+    HTSTheme.setMode(sel.value);
+});</code></pre>
+                </div>
+            </section>
+
+            <!-- 顶部导航栏 -->

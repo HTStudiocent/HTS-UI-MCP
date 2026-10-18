@@ -1,0 +1,64 @@
+<section id="buttons" class="ui-block">
+                <h2>按钮</h2>
+                <p class="ui-desc">圆角 15px，悬停反色过渡 0.25s，按下轻微缩小，禁用半透明。</p>
+                <div class="ui-demo">
+                    <button class="btn" style="margin-top:0">主要按钮</button>
+                    <button class="btn btn-plain" style="margin-top:0">次要按钮</button>
+                    <button class="btn btn-sm" style="margin-top:0">小按钮</button>
+                    <button class="btn btn-plain btn-sm" style="margin-top:0">小·次要</button>
+                    <button class="btn" style="margin-top:0" disabled>禁用按钮</button>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;button class="btn"&gt;主要按钮&lt;/button&gt;
+&lt;button class="btn btn-plain"&gt;次要按钮&lt;/button&gt;
+&lt;button class="btn btn-sm"&gt;小按钮&lt;/button&gt;
+&lt;button class="btn btn-plain btn-sm"&gt;小·次要&lt;/button&gt;
+&lt;button class="btn" disabled&gt;禁用按钮&lt;/button&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 44px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.25s ease, color 0.25s ease,
+                transform 0.15s ease;
+}
+
+.btn:hover {
+    background-color: var(--bg);
+    color: var(--primary);
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-plain {
+    background-color: var(--surface);
+    color: var(--primary);
+}
+
+.btn-plain:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.btn-sm { padding: 8px 24px; font-size: 13px; }
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 表单 -->

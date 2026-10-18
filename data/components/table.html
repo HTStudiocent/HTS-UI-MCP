@@ -1,0 +1,69 @@
+<section id="table" class="ui-block">
+                <h2>表格</h2>
+                <p class="ui-desc">细分隔线，悬停行变浅灰。外层 .table-wrap 防窄屏溢出：手机上表格在容器内横向滚动，整页不左右滑。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead><tr><th>名称</th><th>地址</th><th>状态</th></tr></thead>
+                            <tbody>
+                                <tr><td>HTS官网</td><td>www.haotis.top</td><td>在线</td></tr>
+                                <tr><td>API 服务</td><td>api.haotis.top</td><td>在线</td></tr>
+                                <tr><td>示例项目</td><td>example.haotis.top</td><td>规划中</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="table-wrap"&gt;
+    &lt;table class="table"&gt;
+        &lt;thead&gt;&lt;tr&gt;&lt;th&gt;列1&lt;/th&gt;&lt;th&gt;列2&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;内容&lt;/td&gt;&lt;td&gt;内容&lt;/td&gt;&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: var(--surface);
+    text-align: left;
+}
+
+/* 表格防溢出：窄屏由外层容器横向滚动 */
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap .table {
+    min-width: 480px;
+}
+
+.table th, .table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.table th {
+    font-weight: normal;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--block);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- 弹窗与提示 -->

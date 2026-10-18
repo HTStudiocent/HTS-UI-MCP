@@ -1,0 +1,53 @@
+<section id="empty" class="ui-block">
+                <h2>空状态</h2>
+                <p class="ui-desc">列表/搜索无结果时使用：图标 + 标题 + 说明，可再加按钮。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="empty" id="uiEmptyBox" style="width:100%;border:1px dashed var(--border);border-radius:12px">
+                        <div class="empty-icon">∅</div>
+                        <p class="empty-title">暂无数据</p>
+                        <p>点击「提交收录」添加第一条</p>
+                    </div>
+                    <div class="list-group" id="uiEmptyData" style="width:100%;display:none">
+                        <div class="list-group-item"><span class="lg-text">HTS官网<span class="lg-desc">www.haotis.top</span></span><span class="lg-sub">刚刚添加</span></div>
+                    </div>
+                    <div><button class="btn btn-sm" id="uiEmptyBtn" style="margin-top:0">模拟添加数据</button></div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="empty"&gt;
+    &lt;div class="empty-icon"&gt;∅&lt;/div&gt;
+    &lt;p class="empty-title"&gt;暂无数据&lt;/p&gt;
+    &lt;p&gt;说明文字&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.empty .empty-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--text-faint);
+    background: var(--block);
+}
+
+.empty .empty-title {
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 4px;
+}</code></pre>
+                </div>
+            </section>
+            <!-- 加载中 -->

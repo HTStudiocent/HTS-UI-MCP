@@ -1,0 +1,53 @@
+<section id="tooltip" class="ui-block">
+                <h2>文字提示</h2>
+                <p class="ui-desc">纯 CSS：任意元素加 data-tip 即得顶部气泡，tip-bottom 类改为下方弹出，悬停/键盘聚焦触发。</p>
+                <div class="ui-demo">
+                    <div class="avatar-row" style="padding-top:28px">
+                        <button class="btn btn-plain" data-tip="我是文字提示">悬停我</button>
+                        <button class="btn btn-plain tip-bottom" data-tip="下方提示">我也悬停</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;button class="btn" data-tip="提示文字"&gt;悬停显示&lt;/button&gt;
+&lt;button class="btn tip-bottom" data-tip="下方提示"&gt;朝下弹出&lt;/button&gt;
+&lt;!-- data-tip 可加在任何元素上，无需 JS --&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>[data-tip] {
+    position: relative;
+}
+
+[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.92);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 10;
+}
+
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+[data-tip].tip-bottom::after {
+    bottom: auto;
+    top: calc(100% + 8px);
+}</code></pre>
+                </div>
+            </section>
+            <!-- 下拉菜单 -->

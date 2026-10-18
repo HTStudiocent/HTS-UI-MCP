@@ -1,0 +1,88 @@
+<section id="listgroup" class="ui-block">
+                <h2>列表组</h2>
+                <p class="ui-desc">纵向信息列表：lg-text 主文字区（lg-desc 为副行）、lg-sub 右侧次要信息，自动分隔线与悬停底色。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="list-group" style="width:100%;max-width:420px">
+                        <div class="list-group-item"><span class="lg-text">HTS 官网<span class="lg-desc">www.haotis.top</span></span><span class="lg-sub">2026-10-11</span></div>
+                        <div class="list-group-item"><span class="lg-text">图床<span class="lg-desc">img.haotis.top</span></span><span class="lg-sub">2026-10-16</span></div>
+                        <div class="list-group-item"><span class="lg-text">HTS导航站<span class="lg-desc">dh.haotis.top</span></span><span class="lg-sub">2026-10-17</span></div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="list-group"&gt;
+    &lt;div class="list-group-item"&gt;
+        &lt;span class="lg-text"&gt;标题&lt;span class="lg-desc"&gt;副行说明&lt;/span&gt;&lt;/span&gt;
+        &lt;span class="lg-sub"&gt;右侧信息&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="list-group-item"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.list-group {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.list-group-item + .list-group-item {
+    border-top: 1px solid var(--border);
+}
+
+.list-group-item:hover {
+    background: var(--block);
+}
+
+.list-group-item .lg-sub {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    flex: 0 0 auto;
+}
+
+.list-group-item .lg-text {
+    min-width: 0;
+}
+
+.list-group-item .lg-desc {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}</code></pre>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- 弹窗演示 -->
+    <div id="uiModal" class="modal-mask">
+        <div class="modal-box">
+            <button class="modal-close" id="uiModalClose">×</button>
+            <p class="modal-title">演示弹窗</p>
+            <p style="font-size:14px;color:var(--text-soft)">这是统一弹窗样式：遮罩半透明、卡片圆角 15px，按 ESC / 点遮罩 / 点确定关闭。</p>
+            <div style="margin-top:20px"><button class="btn" id="uiModalOk">确 定</button></div>
+        </div>
+    </div>
+
+    <div id="uiToast" class="toast">提示</div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 HTS工作室 · HTStudiocent · 郝体工作室 haotis</p>
+            <p class="footer-site">www.haotis.top</p>
+            <p><a class="footer-link" href="https://www.rainyun.com/haotis_" target="_blank" rel="noopener">本站由雨云提供计算服务</a></p>
+        </div>
+    </footer>

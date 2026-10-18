@@ -1,0 +1,50 @@
+<section id="spinner" class="ui-block">
+                <h2>加载中</h2>
+                <p class="ui-desc">环形加载指示器：sm / 默认 / lg 三档，纯 CSS 动画，无 JS。</p>
+                <div class="ui-demo">
+                    <div class="avatar-row" id="uiSpinnerRow">
+                        <span class="spinner sm"></span>
+                        <span class="spinner"></span>
+                        <span class="spinner lg"></span>
+                    </div>
+                    <div><button class="btn btn-plain btn-sm" id="uiSpinnerBtn" style="margin-top:0">停止加载</button></div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;span class="spinner sm"&gt;&lt;/span&gt;
+&lt;span class="spinner"&gt;&lt;/span&gt;
+&lt;span class="spinner lg"&gt;&lt;/span&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: hts-spin 0.8s linear infinite;
+    vertical-align: -6px;
+}
+
+.spinner.sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+    vertical-align: -3px;
+}
+
+.spinner.lg {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+    vertical-align: -8px;
+}
+
+@keyframes hts-spin {
+    to { transform: rotate(360deg); }
+}</code></pre>
+                </div>
+            </section>
+            <!-- 文字提示 -->

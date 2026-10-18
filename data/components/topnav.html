@@ -1,0 +1,94 @@
+<section id="topnav" class="ui-block">
+                <h2>顶部导航栏</h2>
+                <p class="ui-desc">固定吸顶，左侧 Logo，右侧导航链接；链接悬停时文字变灰、底部细线从中间展开。</p>
+                <div class="ui-demo" style="padding:16px 20px;flex-direction:column;gap:12px;align-items:stretch">
+                    <div class="header" style="position:static;border-radius:12px">
+                        <div class="header-inner" style="height:56px">
+                            <div class="logo"><span class="logo-text">HTS</span></div>
+                            <nav class="nav">
+                                <a href="javascript:void(0)">首页</a>
+                                <a href="javascript:void(0)">关于</a>
+                                <a href="javascript:void(0)">联系</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;header class="header"&gt;
+    &lt;div class="container header-inner"&gt;
+        &lt;div class="logo"&gt;
+            &lt;img src="htsicon.ico" alt="HTS" class="logo-icon"&gt;
+            &lt;span class="logo-text"&gt;HTS工作室&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;nav class="nav"&gt;
+            &lt;a href="#home"&gt;首页&lt;/a&gt;
+            &lt;a href="#about"&gt;关于&lt;/a&gt;
+            &lt;a href="#contact"&gt;联系&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.header {
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+    margin-left: 12px; /* 左上角图标向右留白 */
+}
+
+.logo-icon { width: 28px; height: 28px; }
+
+.logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+}
+
+.nav { display: flex; align-items: center; gap: 28px; }
+
+.nav a {
+    position: relative;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap; /* 防止窄屏文字被挤压换行 */
+    flex: none;
+    transition: color 0.25s ease;
+}
+
+/* 底部细线从中间展开 */
+.nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%; height: 1px;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.nav a:hover { color: var(--text-muted); }
+.nav a:hover::after { transform: scaleX(1); }</code></pre>
+                </div>
+            </section>
+
+            <!-- 侧边导航栏 -->

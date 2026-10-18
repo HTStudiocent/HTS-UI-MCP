@@ -1,0 +1,81 @@
+<section id="dropdown" class="ui-block">
+                <h2>下拉菜单</h2>
+                <p class="ui-desc">按钮带 dropdown-toggle，菜单为 dropdown-menu；点空白或按 ESC 自动关闭，同页多个互斥。</p>
+                <div class="ui-demo">
+                    <div class="dropdown">
+                        <button class="btn btn-sm dropdown-toggle">操作 ▾</button>
+                        <div class="dropdown-menu">
+                            <button class="dropdown-item">编辑</button>
+                            <button class="dropdown-item">复制</button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item">删除</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-sm dropdown-toggle"&gt;操作 ▾&lt;/button&gt;
+    &lt;div class="dropdown-menu"&gt;
+        &lt;button class="dropdown-item"&gt;编辑&lt;/button&gt;
+        &lt;button class="dropdown-item"&gt;复制&lt;/button&gt;
+        &lt;div class="dropdown-divider"&gt;&lt;/div&gt;
+        &lt;button class="dropdown-item"&gt;删除&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 150px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 8px 24px var(--shadow);
+    display: none;
+    z-index: 20;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 13px;
+    border: none;
+    background: transparent;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--text-soft);
+}
+
+.dropdown-item:hover {
+    background: var(--block);
+    color: var(--text);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 6px 0;
+}</code></pre>
+                </div>
+<div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 引入 hts-ui.js 后调用 HTSUI.init()（或直接加载脚本）即自动绑定，无需编写 JS</code></pre>
+                </div>
+            </section>
+            <!-- 分段控制 -->

@@ -1,0 +1,50 @@
+<section id="skeleton" class="ui-block">
+                <h2>骨架屏</h2>
+                <p class="ui-desc">加载占位：skeleton-line / skeleton-avatar / skeleton-block 三种形状，呼吸动画尊重减少动效偏好。</p>
+                <div class="ui-demo">
+                    <div style="width:100%;max-width:360px" id="uiSkeletonBox">
+                        <div class="skeleton skeleton-avatar" style="margin-bottom:12px"></div>
+                        <div class="skeleton skeleton-line" style="width:60%"></div>
+                        <div class="skeleton skeleton-line"></div>
+                        <div class="skeleton skeleton-block" style="margin-top:12px"></div>
+                    </div>
+                    <div><button class="btn btn-sm" id="uiSkeletonBtn" style="margin-top:0">模拟加载完成</button></div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="skeleton skeleton-avatar"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-line" style="width:60%"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-block"&gt;&lt;/div&gt;
+&lt;!-- 尺寸用行内 width/height 微调 --&gt;</code></pre>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.skeleton {
+    position: relative;
+    background: var(--block);
+    border-radius: 8px;
+    animation: hts-skeleton 1.2s ease-in-out infinite;
+}
+
+@keyframes hts-skeleton {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+}
+
+.skeleton-line {
+    height: 14px;
+    margin-bottom: 10px;
+}
+
+.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.skeleton-block {
+    height: 120px;
+}</code></pre>
+                </div>
+            </section>
+            <!-- 提示条 -->
