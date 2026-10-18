@@ -1,7 +1,7 @@
 {
   "name": "hts-ui-mcp",
-  "version": "2.0.0",
-  "description": "HTS UI MCP 2.0 · 零依赖黑白灰 UI 组件库源码 MCP 服务器（HTML/CSS/JS 动效/响应式全量源码，供 AI 编码客户端调用）",
+  "version": "2.5.0",
+  "description": "HTS UI MCP 2.5 · 零依赖黑白灰 UI 组件库源码 MCP 服务器（HTML/CSS/JS 动效/响应式全量源码，供 AI 编码客户端调用）",
   "main": "hts-ui-mcp.js",
   "bin": {
     "hts-ui-mcp": "hts-ui-mcp.js"
