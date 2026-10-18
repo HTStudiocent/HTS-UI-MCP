@@ -1,0 +1,91 @@
+<section id="accordion" class="ui-block">
+                <h2>折叠面板</h2>
+                <p class="ui-desc">点击标题展开/收起本项；给 accordion-item 加 open 类即默认展开。</p>
+                <div class="ui-demo ui-demo-col">
+                    <div class="accordion">
+                        <div class="accordion-item open">
+                            <button class="accordion-head">HTS UI 是什么？</button>
+                            <div class="accordion-body">一套黑白灰扁平风格、零依赖的 UI 组件库。</div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-head">如何引入？</button>
+                            <div class="accordion-body">页面引入 hts-ui.css 与 hts-ui.js，底部调用 HTSUI.init()。</div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-head">支持深色模式吗？</button>
+                            <div class="accordion-body">支持，颜色全部走 CSS 变量，跟随主题自动变化。</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">HTML</span><button class="code-copy">复制</button></div>
+                    <pre><code>&lt;div class="accordion"&gt;
+    &lt;div class="accordion-item open"&gt;
+        &lt;button class="accordion-head"&gt;标题一&lt;/button&gt;
+        &lt;div class="accordion-body"&gt;内容一&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;button class="accordion-head"&gt;标题二&lt;/button&gt;
+        &lt;div class="accordion-body"&gt;内容二&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                                <div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">CSS</span><button class="code-copy">复制</button></div>
+                    <pre><code>.accordion {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.accordion-item + .accordion-item {
+    border-top: 1px solid var(--border);
+}
+
+.accordion-head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.accordion-head:hover {
+    background: var(--block);
+}
+
+.accordion-head::after {
+    content: '+';
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.accordion-item.open .accordion-head::after {
+    content: '−';
+}
+
+.accordion-body {
+    display: none;
+    padding: 0 18px 14px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-soft);
+}
+
+.accordion-item.open .accordion-body {
+    display: block;
+}</code></pre>
+                </div>
+<div class="code-box">
+                    <div class="code-box-head"><span class="code-box-lang">JS</span><button class="code-copy">复制</button></div>
+                    <pre><code>// 引入 hts-ui.js 后调用 HTSUI.init()（或直接加载脚本）即自动绑定，无需编写 JS</code></pre>
+                </div>
+            </section>
+            <!-- 步骤条 -->
