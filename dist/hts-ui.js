@@ -1,5 +1,5 @@
 /* ============================================================
-   HTS UI v2.0 JS · 无依赖组件行为层
+   HTS UI v2.5 JS · 无依赖组件行为层
    Author: HTStudiocent · 展示: https://www.haotis.top/ui/
    License: MIT
 
